@@ -23,7 +23,7 @@ var _ = Describe("Staging", func() {
 
 	It("works", func() {
 		Eventually(cf.Cf("push", appName, "-p", "dora", "--no-start")).Should(gexec.Exit(0))
-		Eventually(cf.Cf("set-env", appName, "CF_DIEGO_STAGE_BETA", "true")).Should(gexec.Exit(0))
+		Eventually(cf.Cf("set-env", appName, "DIEGO_STAGE_BETA", "true")).Should(gexec.Exit(0))
 		Eventually(cf.Cf("start", appName), 5*time.Minute).Should(gexec.Exit(0))
 	})
 })
