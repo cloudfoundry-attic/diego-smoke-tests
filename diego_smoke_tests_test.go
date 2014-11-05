@@ -18,7 +18,7 @@ var _ = Describe("Staging", func() {
 	})
 
 	AfterEach(func() {
-		Eventually(cf.Cf("delete", "-f", appName)).Should(gexec.Exit(0))
+		Eventually(cf.Cf("delete", "-r", "-f", appName)).Should(gexec.Exit(0))
 	})
 
 	It("works", func() {
