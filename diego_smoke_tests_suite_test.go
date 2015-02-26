@@ -31,6 +31,4 @@ func guidForAppName(appName string) string {
 func enableDiego(appName string) {
 	guid := guidForAppName(appName)
 	Eventually(cf.Cf("curl", "/v2/apps/"+guid, "-X", "PUT", "-d", `{"diego": true}`)).Should(gexec.Exit(0))
-	Eventually(cf.Cf("set-env", appName, "DIEGO_STAGE_BETA", "true")).Should(gexec.Exit(0))
-	Eventually(cf.Cf("set-env", appName, "DIEGO_RUN_BETA", "true")).Should(gexec.Exit(0))
 }
