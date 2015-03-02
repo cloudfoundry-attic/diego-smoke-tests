@@ -37,6 +37,8 @@ var _ = Describe("Staging and running", func() {
 		enableDiego(appName)
 		Eventually(cf.Cf("start", appName), 5*time.Minute).Should(gexec.Exit(0))
 
+		Eventually(cf.Cf("logs", appName, "--recent")).Should(gbytes.Say("[HEALTH/0]"))
+
 		Eventually(func() *gexec.Session {
 			curl := runner.Curl(appRoute)
 			curl.Wait()
