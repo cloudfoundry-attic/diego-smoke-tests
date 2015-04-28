@@ -23,7 +23,7 @@ var _ = Describe("Staging and running", func() {
 	BeforeEach(func() {
 		appName = generator.RandomName()
 		appsDomain = os.Getenv("SMOKE_TESTS_APPS_DOMAIN")
-		Ω(appsDomain).ShouldNot(BeEmpty(), "must set $SMOKE_TESTS_APPS_DOMAIN")
+		Expect(appsDomain).NotTo(BeEmpty(), "must set $SMOKE_TESTS_APPS_DOMAIN")
 		appRoute = "http://" + appName + "." + appsDomain + "/"
 	})
 
