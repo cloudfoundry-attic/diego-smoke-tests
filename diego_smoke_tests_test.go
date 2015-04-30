@@ -39,10 +39,12 @@ var _ = Describe("Staging and running", func() {
 
 		Eventually(cf.Cf("logs", appName, "--recent")).Should(gbytes.Say("[HEALTH/0]"))
 
-		Eventually(func() *gexec.Session {
-			curl := runner.Curl(appRoute)
-			curl.Wait()
-			return curl
-		}).Should(gbytes.Say("Hi, I'm Dora!"))
+		curlAppRouteWithTimeout := func() string {
+			curlCmd := runner.Curl(appRoute)
+			runner.NewCmdRunner(curlCmd, 30*time.Second).Run()
+			Expect(string(curlCmd.Err.Contents())).To(HaveLen(0))
+			return string(curlCmd.Out.Contents())
+		}
+		Eventually(curlAppRouteWithTimeout).Should(ContainSubstring("Hi, I'm Dora!"))
 	})
 })
