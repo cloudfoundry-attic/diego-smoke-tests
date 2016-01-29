@@ -14,7 +14,7 @@ Prerequisites:
 - This repository and its Go dependencies should be present in your GOPATH.
 - The environment variable `SMOKE_TESTS_APPS_DOMAIN` should be exported to the
   name of a domain associated with the space above. For testing on a local BOSH-lite,
-  "10.244.0.34.xip.io" is recommended. 
+  "bosh-lite.com" is recommended. 
 
 Before running the smoke tests, log into your CF instance with the CLI and
 target the org and the space in which you intend to run the smoke tests. The
